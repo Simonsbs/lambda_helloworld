@@ -1,0 +1,22 @@
+﻿service: lambda-helloworld
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  environment:
+    MY_ENV_VARIABLE: ${env:MY_ENV_VARIABLE}
+    AWS_REGION: ${env:AWS_REGION}
+
+functions:
+  hello:
+    handler: handler.helloWorld
+    events:
+      - http:
+          path: helloWorld
+          method: get
+          cors: true
+
+plugins:
+  - serverless-offline
